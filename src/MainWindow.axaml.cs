@@ -686,6 +686,7 @@ namespace ListFileTool
                 Width = 300,
                 Height = 150,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                Background = new SolidColorBrush(Color.Parse("#1B1324"))
             };
 
             // Build the inner content (StackPanel).
@@ -697,27 +698,32 @@ namespace ListFileTool
             var textBlock = new TextBlock
             {
                 Text = message,
-                TextWrapping = Avalonia.Media.TextWrapping.Wrap
+                Foreground = new SolidColorBrush(Color.Parse("#F3E5FF")),
+                TextWrapping = TextWrapping.Wrap
             };
 
-            var okButton = new Button
+            var closeButton = new Button
             {
                 Content = "Close",
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Margin = new Thickness(0, 10, 0, 0)
+                Margin = new Thickness(0, 10, 0, 0),
+                Background = new SolidColorBrush(Color.Parse("#292038")),
+                Foreground = new SolidColorBrush(Color.Parse("#F3E5FF")),
+                BorderBrush = new SolidColorBrush(Color.Parse("#E6B3FF")),
+                BorderThickness = new Thickness(2)
             };
 
             // Use the dialog variable directly in the command.
-            okButton.Command = new DelegateCommand(_ => dialog.Close());
+            closeButton.Click += (s, e) => dialog.Close();
 
             // Add controls to the stack panel.
             stackPanel.Children.Add(textBlock);
-            stackPanel.Children.Add(okButton);
+            stackPanel.Children.Add(closeButton);
 
             // Wrap the stack panel in a border with a DeepPink border.
             var border = new Border
             {
-                BorderBrush = new SolidColorBrush(Avalonia.Media.Colors.DeepPink),
+                BorderBrush = new SolidColorBrush(Color.Parse("#E6B3FF")),
                 BorderThickness = new Thickness(2),
                 Child = stackPanel
             };
@@ -736,30 +742,42 @@ namespace ListFileTool
                 Title = "Configuration Error",
                 Width = 300,
                 Height = 150,
-                WindowStartupLocation = WindowStartupLocation.CenterOwner
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                Background = new SolidColorBrush(Color.Parse("#1B1324"))
             };
 
-            // Create the stack panel to hold the content
             var stackPanel = new StackPanel { Margin = new Thickness(10) };
 
-            // Create the error message TextBlock
-            var textBlock = new TextBlock { Text = message, Foreground = Brushes.Red, TextWrapping = TextWrapping.Wrap };
+            var textBlock = new TextBlock
+            {
+                Text = message,
+                Foreground = new SolidColorBrush(Color.Parse("#FF6E6E")),
+                TextWrapping = TextWrapping.Wrap
+            };
+
+            var closeButton = new Button
+            {
+                Content = "OK",
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Margin = new Thickness(10),
+                Background = new SolidColorBrush(Color.Parse("#292038")),
+                Foreground = new SolidColorBrush(Color.Parse("#F3E5FF")),
+                BorderBrush = new SolidColorBrush(Color.Parse("#E6B3FF")),
+                BorderThickness = new Thickness(2)
+            };
 
             // Create the OK button to close the dialog
-            var closeButton = new Button { Content = "OK", HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center, Margin = new Thickness(10) };
             closeButton.Click += (s, e) => errorDialog.Close();
 
-            // Add the text block and button to the stack panel
             stackPanel.Children.Add(textBlock);
             stackPanel.Children.Add(closeButton);
 
-            // Create a pink border around the content
             var border = new Border
             {
-                BorderBrush = new SolidColorBrush(Colors.DeepPink),  // Set the border color to DeepPink
-                BorderThickness = new Thickness(2), // Set the border thickness
-                Padding = new Thickness(10), // Padding inside the border
-                Child = stackPanel // Set the stack panel as the content inside the border
+                BorderBrush = new SolidColorBrush(Color.Parse("#E6B3FF")),
+                BorderThickness = new Thickness(2),
+                Padding = new Thickness(10),
+                Child = stackPanel
             };
 
             // Set the content of the error dialog
@@ -768,7 +786,6 @@ namespace ListFileTool
             // Show the error dialog as modal
             await errorDialog.ShowDialog(this);
         }
-
     }
 
     // A basic implementation of ICommand.

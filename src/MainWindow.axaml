@@ -1,116 +1,123 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="ListFileTool.MainWindow"
-        Title="ListFileTool" Width="710" Height="300">
+        Title="ListFileTool" Width="710" Height="300"
+        Background="#1B1324">
+  
+  <Window.Styles>
+    <!-- Global style for TextBlocks -->
+    <Style Selector="TextBlock">
+      <Setter Property="Foreground" Value="#F3E5FF"/>
+    </Style>
+
+    <!-- Global style for Buttons -->
+    <Style Selector="Button">
+      <Setter Property="Background" Value="#292038"/>
+      <Setter Property="Foreground" Value="#F3E5FF"/>
+      <Setter Property="BorderBrush" Value="#E6B3FF"/>
+      <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- Hover effect for Buttons -->
+    <Style Selector="Button:pointerover">
+      <Setter Property="Background" Value="#D490F5"/>
+      <Setter Property="Foreground" Value="#1B1324"/>
+    </Style>
+
+    <!-- Global style for TextBoxes -->
+    <Style Selector="TextBox">
+      <Setter Property="Background" Value="#292038"/>
+      <Setter Property="Foreground" Value="#EAE6FF"/>
+    </Style>
+  </Window.Styles>
+
   <TabControl>
     <!-- ListfileGen Tab -->
     <TabItem Header="ListfileGen">
       <Grid Margin="10">
         <Grid.RowDefinitions>
-          <RowDefinition Height="Auto"/>  <!-- Top Content -->
-          <RowDefinition Height="*" />    <!-- Middle (Expandable) -->
-          <RowDefinition Height="Auto"/>  <!-- Bottom (Loading Bar) -->
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        
+
         <!-- Left panel: Display file list information -->
         <StackPanel Grid.Row="0" Grid.Column="0" Spacing="5">
-          <TextBlock Text="Configuration settings:" />
-          <TextBlock x:Name="txtLFFolder" Text="./output_listfile.txt" Foreground="Red" />
-          <TextBlock x:Name="txtInputFolder" Text="Input Folder: " Foreground="Red" />
-          <TextBlock x:Name="txtDataFolder" Text="Data Folder: " Foreground="Red" />
-          <TextBlock x:Name="txtOutputFolder" Text="Output Folder: " Foreground="Red" />
-          <!-- Add space with an empty TextBlock -->
+          <TextBlock Text="Configuration settings:"/>
+          <TextBlock x:Name="txtLFFolder" Text="./output_listfile.txt"/>
+          <TextBlock x:Name="txtInputFolder" Text="Input Folder: "/>
+          <TextBlock x:Name="txtDataFolder" Text="Data Folder: "/>
+          <TextBlock x:Name="txtOutputFolder" Text="Output Folder: "/>
           <TextBlock Text=" " Height="10"/>
-          <TextBlock x:Name="txtCleanerAlert" Text="" Foreground="Red" FontSize="16" FontWeight="Bold" />
-          <TextBlock x:Name="txtCleanerInfo" Text="" Foreground="Yellow" />
+          <TextBlock x:Name="txtCleanerAlert" Text="" FontSize="16" FontWeight="Bold" Foreground="#FF6E6E"/>
+          <TextBlock x:Name="txtCleanerInfo" Text="" Foreground="Yellow"/>
         </StackPanel>
-        
-    <!-- Right-side controls -->
-    <StackPanel x:Name="rightPanel" Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Top">
-      <Button x:Name="ProcessAllButton" Content="Process All" Margin="0,5" Click="btnProcessAll_Click" />
-      <!-- Save button will be added here dynamically -->
-    </StackPanel>
+
+        <!-- Right-side controls -->
+        <StackPanel x:Name="rightPanel" Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Top">
+          <Button x:Name="ProcessAllButton" Content="Process All" Click="btnProcessAll_Click"/>
+        </StackPanel>
 
         <!-- Loading Bar at the Bottom -->
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,10,0,0">
           <TextBlock Name="StatusTextBlock" Text="Idle..." HorizontalAlignment="Center" Margin="0,0,0,5"/>
           <ProgressBar Name="LoadingBar" IsIndeterminate="True" Width="200" IsVisible="False"/>
         </StackPanel>
-
       </Grid>
     </TabItem>
 
     <!-- Cleaner Tab -->
-<TabItem Header="Cleaner">
-  <StackPanel Margin="10">
-    <!-- Folder row -->
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-      <TextBlock Text="Folder :" Width="50" VerticalAlignment="Center"/>
-      <TextBox x:Name="tb_cleaner_dir" Width="476" Margin="4,0"/>
-      <Button x:Name="btnSelectFolder" Content="..." Width="38" Margin="4,0" Click="btnSelectFolder_Click"/>
-    </StackPanel>
-    <!-- Listfile row -->
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10">
-      <TextBlock Text="Listfile :" Width="50" VerticalAlignment="Center"/>
-      <TextBox x:Name="tb_cleaner_lf" Width="476" Margin="4,0"/>
-      <Button x:Name="btnSelectListfile" Content="..." Width="38" Margin="4,0" Click="btnSelectListfile_Click"/>
-    </StackPanel>
-    <!-- Action button aligned to center -->
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
-      <Button x:Name="btnRemoveUselessFiles" 
-              Content="Remove useless files" 
-              Margin="4" 
-              Click="button5_Click" />
-    </StackPanel>
-  </StackPanel>
-</TabItem>
+    <TabItem Header="Cleaner">
+      <StackPanel Margin="10">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+          <TextBlock Text="Folder :" Width="50" VerticalAlignment="Center"/>
+          <TextBox x:Name="tb_cleaner_dir" Width="476" Margin="4,0"/>
+          <Button x:Name="btnSelectFolder" Content="..." Width="38" Margin="4,0" Click="btnSelectFolder_Click"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10">
+          <TextBlock Text="Listfile :" Width="50" VerticalAlignment="Center"/>
+          <TextBox x:Name="tb_cleaner_lf" Width="476" Margin="4,0"/>
+          <Button x:Name="btnSelectListfile" Content="..." Width="38" Margin="4,0" Click="btnSelectListfile_Click"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+          <Button x:Name="btnRemoveUselessFiles" Content="Remove useless files" Margin="4" Click="button5_Click"/>
+        </StackPanel>
+      </StackPanel>
+    </TabItem>
 
-    <!-- Settings Tab with 5 file selection rows -->
-<TabItem Header="Settings">
-  <StackPanel x:Name="settingsPanel" Margin="10" Spacing="10">
-    
-    <!-- Output Listfile Row -->
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
-      <TextBlock Text="Output Listfile:" Width="130" VerticalAlignment="Center"/>
-      <TextBox x:Name="tbOutputListfile" Width="460" Text="./output_listfile.txt" TextChanged="tb_settings_olf_TextChanged"/>
-      <Button Content="..." Width="40" Click="SelectOutputListfile_Click"/>
-    </StackPanel>
-    
-    <!-- Input Folder Row -->
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
-      <TextBlock Text="Input Folder:" Width="130" VerticalAlignment="Center"/>
-      <TextBox x:Name="tbInputFolder" Width="460" TextChanged="tb_settings_InputDir_TextChanged"/>
-      <Button Content="..." Width="40" Click="SelectInputFolder_Click"/>
-    </StackPanel>
-    
-    <!-- Data Folder Row -->
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
-      <TextBlock Text="Data Folder:" Width="130" VerticalAlignment="Center"/>
-      <TextBox x:Name="tbDataFolder" Width="460" TextChanged="tb_settings_DataDir_TextChanged"/>
-      <Button Content="..." Width="40" Click="SelectDataFolder_Click"/>
-    </StackPanel>
-    
-    <!-- Output Folder Row -->
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
-      <TextBlock Text="Output Folder:" Width="130" VerticalAlignment="Center"/>
-      <TextBox x:Name="tbOutputFolder" Width="460" TextChanged="tb_settings_OutputDir_TextChanged"/>
-      <Button Content="..." Width="40" Click="SelectOutputFolder_Click"/>
-    </StackPanel>
-    
-    <!-- Auto Clean Row -->
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
-      <CheckBox x:Name="autoCleanOption" Content="Auto Clean" Checked="MyCheckBox_Checked" Unchecked="MyCheckBox_Unchecked" Width="130" VerticalAlignment="Center"/>
-      <TextBox x:Name="fileDirectory" TextChanged="clnListFileChangedx" Width="460"/>
-      <Button Content="..." Width="40" Click="SelectFile_Click"/>
-    </StackPanel>
-
-  </StackPanel>
-</TabItem>
-
+    <!-- Settings Tab -->
+    <TabItem Header="Settings">
+      <StackPanel x:Name="settingsPanel" Margin="10" Spacing="10">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
+          <TextBlock Text="Output Listfile:" Width="130" VerticalAlignment="Center"/>
+          <TextBox x:Name="tbOutputListfile" Width="460" Text="./output_listfile.txt" TextChanged="tb_settings_olf_TextChanged"/>
+          <Button Content="..." Width="40" Click="SelectOutputListfile_Click"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
+          <TextBlock Text="Input Folder:" Width="130" VerticalAlignment="Center"/>
+          <TextBox x:Name="tbInputFolder" Width="460" TextChanged="tb_settings_InputDir_TextChanged"/>
+          <Button Content="..." Width="40" Click="SelectInputFolder_Click"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
+          <TextBlock Text="Data Folder:" Width="130" VerticalAlignment="Center"/>
+          <TextBox x:Name="tbDataFolder" Width="460" TextChanged="tb_settings_DataDir_TextChanged"/>
+          <Button Content="..." Width="40" Click="SelectDataFolder_Click"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
+          <TextBlock Text="Output Folder:" Width="130" VerticalAlignment="Center"/>
+          <TextBox x:Name="tbOutputFolder" Width="460" TextChanged="tb_settings_OutputDir_TextChanged"/>
+          <Button Content="..." Width="40" Click="SelectOutputFolder_Click"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
+          <CheckBox x:Name="autoCleanOption" Content="Auto Clean" Checked="MyCheckBox_Checked" Unchecked="MyCheckBox_Unchecked" Width="130" VerticalAlignment="Center"/>
+          <TextBox x:Name="fileDirectory" TextChanged="clnListFileChangedx" Width="460"/>
+          <Button Content="..." Width="40" Click="SelectFile_Click"/>
+        </StackPanel>
+      </StackPanel>
+    </TabItem>
   </TabControl>
 </Window>
