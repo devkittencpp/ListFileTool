@@ -30,3 +30,9 @@ Clone the repository and build the project using the following commands:
 git clone https://github.com/devkittencpp/ListFileTool.git
 cd ListFileTool
 dotnet build
+```
+
+## Windows
+```bash
+dotnet publish -r win-x64 -c Release --self-contained -p:PublishSingleFile=true
+```
